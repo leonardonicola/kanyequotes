@@ -40,9 +40,7 @@ export default {
 
       axios
       .get('https://emojihub.herokuapp.com/api/random')
-      .then(emoji => emoji.data.htmlCode.forEach(element => {
-        this.emoji = element
-      }))
+      .then(emoji => this.emoji = emoji.data.htmlCode[0])
     },
     shuffle(){
       this.toggle = !this.toggle
@@ -55,7 +53,8 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '@/assets/_shared.scss';
 *{
   box-sizing: border-box;
   font-family: 'Helvetica';
@@ -67,28 +66,33 @@ body{
   max-width: calc(550px + 2rem);
 }
 
-main > h3{
-  text-align: center;
-  margin-bottom: 50px;
+main{
+  h3{
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  a{
+   text-decoration: none;
+   color: rgb(0, 100, 200)
+  }
 }
 
-a{
-  text-decoration: none;
-  color: rgb(0, 100, 200)
-}
 
-.card {
+
+.card, .quoteToggle {
   position: relative;
   padding: 1rem;
-  background-color: hsl(0, 0%, 94%);
-  border: 1px solid hsl(0, 0%, 92%);
+  background-color: $bg-color;
+  border: $border;
   border-radius: 10px;
   margin: 20px 0;
-}
-.card p{
-  position: absolute;
-  right: 15px;
-  bottom: 0;
+
+  p{
+    position: absolute;
+    right: 15px;
+    bottom: 0;
+  }
 }
 
 .quotesList{
@@ -99,21 +103,14 @@ a{
 ul{
   padding: 0;
   margin: 20px;
+
+  li{
+    border-bottom: 1px solid #999;
+    list-style-type:none;
+    opacity:0.85
+  } 
 }
 
-li{
-  border-bottom: 1px solid #999;
-  list-style-type:none;
-  opacity:0.85
-}
-
-.quoteToggle{
-  padding: 1rem;
-  background-color: hsl(0, 0%, 94%);
-  border: 1px solid hsl(0, 0%, 92%);
-  border-radius: 10px;
-  margin: 20px 0;
-}
 
 button{
   padding: 1rem;
@@ -124,9 +121,6 @@ button{
   font-family: inherit;
   font-size: 0.8rem;
   font-weight: 500;
-}
-
-.quoteToggle button{
   padding-left: 0;
 }
 
